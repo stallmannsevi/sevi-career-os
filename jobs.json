@@ -1,0 +1,28 @@
+[
+  {
+    "score": 98,
+    "company": "Karl Storz",
+    "title": "VP Market Management",
+    "location": "Tuttlingen / Hybrid",
+    "sector": "MedTech",
+    "german": "German preferred",
+    "germanLevel": "yellow",
+    "published": "Kontrol edilecek",
+    "applied": false,
+    "status": "Takipte",
+    "link": "https://www.linkedin.com/jobs/"
+  },
+  {
+    "score": 96,
+    "company": "Axolabs",
+    "title": "Senior Director Marketing",
+    "location": "Berlin",
+    "sector": "Healthcare / Pharma Services",
+    "german": "Likely English-friendly",
+    "germanLevel": "green",
+    "published": "Kontrol edilecek",
+    "applied": false,
+    "status": "Başvurulacak",
+    "link": "https://www.linkedin.com/jobs/"
+  }
+]
