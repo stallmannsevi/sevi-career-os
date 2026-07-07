@@ -1,73 +1,641 @@
-Sevi Career OS
-Healthcare / MedTech / Pharma Executive Job Tracker
-Tüm İlanlara Git
-Almanca Şart Değil
-Berlin
-90+ Uyum
-Veriyi Dışa Aktar
-Aktif İlan
-0
-Bugün Kesin Başvur
-0
-Almanca Şart Değil
-0
-Başvurulan
-0
-🔥 Bugün Kesin Başvur
-📋 Tüm İlanlar
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sevi Career OS</title>
+  <style>
+    :root {
+      --bg: #f5f6f8;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --dark: #111827;
+      --green: #15803d;
+      --yellow: #a16207;
+      --red: #b91c1c;
+      --blue: #2563eb;
+      --purple: #7c3aed;
+    }
 
-          Tüm lokasyonlar
-          Berlin
-          Remote
-          Germany
-        
-          Almanca filtresi
-          Almanca şart değil
-          Almanca tercih
-          Almanca zorunlu
-        
-          Tüm seviyeler
-          VP
-          Director+
-          Head
-          Senior Manager
-        
-          Tüm durumlar
-          Başvurmadım
-          Başvurulacak
-          Başvurdum
-          Recruiter'a yazıldı
-          Interview
-          Offer
-          Red
-        
-          Tüm skorlar
-          90+
-          80+
-          70+
-        
-SKOR
-ŞIRKET
-POZISYON
-LOKASYON
-SEKTÖR
-ALMANCA
-YAYINDA
-DURUM
-NOT
-AÇ
+    * { box-sizing: border-box; }
 
-➕ İlan Ekle
-Yeni ilanı manuel ekle
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
 
+    header {
+      background: var(--dark);
+      color: white;
+      padding: 24px;
+    }
 
+    header h1 {
+      margin: 0 0 6px 0;
+      font-size: 28px;
+    }
 
+    header p {
+      margin: 0;
+      color: #d1d5db;
+    }
 
+    main {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 24px;
+    }
 
-            Almanca şart değil
-            Almanca tercih
-            Almanca zorunlu
-          
+    .topbar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 18px;
+    }
 
+    .button {
+      border: 1px solid var(--border);
+      background: white;
+      border-radius: 10px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 600;
+    }
 
-İlanı Ekle
+    .button.primary {
+      background: var(--dark);
+      color: white;
+      border-color: var(--dark);
+    }
+
+    .button:hover {
+      opacity: 0.88;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+
+    .metric {
+      font-size: 32px;
+      font-weight: 800;
+      margin-top: 6px;
+    }
+
+    .label {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .section-title {
+      margin: 28px 0 12px;
+      font-size: 22px;
+    }
+
+    .priority-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .job-card h3 {
+      margin: 0 0 6px;
+    }
+
+    .job-card p {
+      margin: 4px 0;
+      color: var(--muted);
+    }
+
+    .score {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: #eef2ff;
+      color: #3730a3;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin: 3px 4px 3px 0;
+      background: #f3f4f6;
+    }
+
+    .green { color: var(--green); }
+    .yellow { color: var(--yellow); }
+    .red { color: var(--red); }
+
+    .filters {
+      display: grid;
+      grid-template-columns: 2fr repeat(5, minmax(120px, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    input, select, textarea {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 14px;
+      width: 100%;
+      background: white;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    th {
+      background: #f9fafb;
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    tr:hover td {
+      background: #fafafa;
+    }
+
+    a {
+      color: var(--blue);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .status-select {
+      min-width: 140px;
+    }
+
+    .notes {
+      min-width: 180px;
+      min-height: 42px;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .add-form {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .full { grid-column: 1 / -1; }
+
+    details summary {
+      cursor: pointer;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    @media (max-width: 900px) {
+      .grid, .priority-list, .filters, .add-form {
+        grid-template-columns: 1fr;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Sevi Career OS</h1>
+    <p>Healthcare / MedTech / Pharma Executive Job Tracker</p>
+  </header>
+
+  <main>
+    <div class="topbar">
+      <button class="button primary" onclick="scrollToJobs()">Tüm İlanlara Git</button>
+      <button class="button" onclick="setQuickFilter('english')">Almanca Şart Değil</button>
+      <button class="button" onclick="setQuickFilter('berlin')">Berlin</button>
+      <button class="button" onclick="setQuickFilter('top')">90+ Uyum</button>
+      <button class="button" onclick="exportData()">Veriyi Dışa Aktar</button>
+    </div>
+
+    <section class="grid">
+      <div class="card">
+        <div class="label">Aktif İlan</div>
+        <div class="metric" id="metricTotal">0</div>
+      </div>
+      <div class="card">
+        <div class="label">Bugün Kesin Başvur</div>
+        <div class="metric" id="metricPriority">0</div>
+      </div>
+      <div class="card">
+        <div class="label">Almanca Şart Değil</div>
+        <div class="metric" id="metricEnglish">0</div>
+      </div>
+      <div class="card">
+        <div class="label">Başvurulan</div>
+        <div class="metric" id="metricApplied">0</div>
+      </div>
+    </section>
+
+    <h2 class="section-title">🔥 Bugün Kesin Başvur</h2>
+    <section class="priority-list" id="priorityList"></section>
+
+    <h2 class="section-title" id="jobsSection">📋 Tüm İlanlar</h2>
+
+    <section class="card">
+      <div class="filters">
+        <input id="searchInput" placeholder="Şirket, pozisyon veya sektör ara..." oninput="render()" />
+        <select id="locationFilter" onchange="render()">
+          <option value="all">Tüm lokasyonlar</option>
+          <option value="berlin">Berlin</option>
+          <option value="remote">Remote</option>
+          <option value="germany">Germany</option>
+        </select>
+        <select id="germanFilter" onchange="render()">
+          <option value="all">Almanca filtresi</option>
+          <option value="green">Almanca şart değil</option>
+          <option value="yellow">Almanca tercih</option>
+          <option value="red">Almanca zorunlu</option>
+        </select>
+        <select id="levelFilter" onchange="render()">
+          <option value="all">Tüm seviyeler</option>
+          <option value="vp">VP</option>
+          <option value="director">Director+</option>
+          <option value="head">Head</option>
+          <option value="manager">Senior Manager</option>
+        </select>
+        <select id="statusFilter" onchange="render()">
+          <option value="all">Tüm durumlar</option>
+          <option value="Başvurmadım">Başvurmadım</option>
+          <option value="Başvurulacak">Başvurulacak</option>
+          <option value="Başvurdum">Başvurdum</option>
+          <option value="Recruiter'a yazıldı">Recruiter'a yazıldı</option>
+          <option value="Interview">Interview</option>
+          <option value="Offer">Offer</option>
+          <option value="Red">Red</option>
+        </select>
+        <select id="scoreFilter" onchange="render()">
+          <option value="0">Tüm skorlar</option>
+          <option value="90">90+</option>
+          <option value="80">80+</option>
+          <option value="70">70+</option>
+        </select>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Skor</th>
+            <th>Şirket</th>
+            <th>Pozisyon</th>
+            <th>Lokasyon</th>
+            <th>Sektör</th>
+            <th>Almanca</th>
+            <th>Yayında</th>
+            <th>Durum</th>
+            <th>Not</th>
+            <th>Aç</th>
+          </tr>
+        </thead>
+        <tbody id="jobTable"></tbody>
+      </table>
+    </section>
+
+    <h2 class="section-title">➕ İlan Ekle</h2>
+    <section class="card">
+      <details>
+        <summary>Yeni ilanı manuel ekle</summary>
+        <div class="add-form">
+          <input id="newCompany" placeholder="Şirket" />
+          <input id="newTitle" placeholder="Pozisyon" />
+          <input id="newLocation" placeholder="Lokasyon" />
+          <input id="newSector" placeholder="Sektör" />
+          <input id="newScore" type="number" placeholder="Skor 0-100" />
+          <select id="newGermanLevel">
+            <option value="green">Almanca şart değil</option>
+            <option value="yellow">Almanca tercih</option>
+            <option value="red">Almanca zorunlu</option>
+          </select>
+          <input id="newPublished" placeholder="Yayın tarihi / kaç gündür yayında" />
+          <input id="newLink" class="full" placeholder="LinkedIn veya kariyer sayfası linki" />
+          <textarea id="newNotes" class="full" placeholder="Notlar"></textarea>
+          <button class="button primary" onclick="addJob()">İlanı Ekle</button>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <script>
+    const defaultJobs = [
+      {
+        id: "karl-storz-vp-market-management",
+        score: 98,
+        company: "Karl Storz",
+        title: "VP Market Management",
+        location: "Tuttlingen / Hybrid",
+        sector: "MedTech",
+        level: "vp",
+        german: "German preferred",
+        germanLevel: "yellow",
+        published: "Kontrol edilecek",
+        status: "Başvurulacak",
+        notes: "Global marketing, portfolio, launch, executive leadership. Çok güçlü eşleşme.",
+        link: "https://www.linkedin.com/jobs/"
+      },
+      {
+        id: "axolabs-senior-director-marketing",
+        score: 96,
+        company: "Axolabs",
+        title: "Senior Director Marketing",
+        location: "Berlin",
+        sector: "Healthcare / Pharma Services",
+        level: "director",
+        german: "Likely English-friendly",
+        germanLevel: "green",
+        published: "Kontrol edilecek",
+        status: "Başvurulacak",
+        notes: "Berlin + senior director seviyesi. B2B healthcare positioning önemli.",
+        link: "https://www.linkedin.com/jobs/"
+      },
+      {
+        id: "bd-sr-global-marketing-manager",
+        score: 94,
+        company: "BD",
+        title: "Sr. Global Marketing Manager",
+        location: "Germany / Remote possible",
+        sector: "Diagnostics / MedTech",
+        level: "manager",
+        german: "German not clearly required",
+        germanLevel: "green",
+        published: "Kontrol edilecek",
+        status: "Başvurmadım",
+        notes: "Global pazarlama, value proposition, regional teams. Unvan biraz düşük olabilir.",
+        link: "https://www.linkedin.com/jobs/"
+      },
+      {
+        id: "edwards-director-marketing-thv-germany",
+        score: 93,
+        company: "Edwards Lifesciences",
+        title: "Director Marketing THV Germany",
+        location: "Germany",
+        sector: "MedTech",
+        level: "director",
+        german: "Fluent German required",
+        germanLevel: "red",
+        published: "Kontrol edilecek",
+        status: "Başvurmadım",
+        notes: "İçerik çok uygun ama Almanca büyük risk.",
+        link: "https://www.linkedin.com/jobs/"
+      },
+      {
+        id: "hologic-senior-marketing-manager-dach",
+        score: 91,
+        company: "Hologic",
+        title: "Senior Marketing Manager DACH",
+        location: "Germany / DACH",
+        sector: "MedTech / Diagnostics",
+        level: "manager",
+        german: "Fluent German required",
+        germanLevel: "red",
+        published: "Kontrol edilecek",
+        status: "Başvurmadım",
+        notes: "Kadın sağlığı ve MedTech çok uygun; Almanca riski yüksek.",
+        link: "https://www.linkedin.com/jobs/"
+      }
+    ];
+
+    let jobs = loadJobs();
+
+    function loadJobs() {
+      const saved = localStorage.getItem("seviCareerJobs");
+      if (saved) return JSON.parse(saved);
+      localStorage.setItem("seviCareerJobs", JSON.stringify(defaultJobs));
+      return defaultJobs;
+    }
+
+    function saveJobs() {
+      localStorage.setItem("seviCareerJobs", JSON.stringify(jobs));
+    }
+
+    function germanText(level) {
+      if (level === "green") return "Almanca şart değil";
+      if (level === "yellow") return "Almanca tercih";
+      return "Almanca zorunlu";
+    }
+
+    function renderMetrics(filteredJobs) {
+      document.getElementById("metricTotal").textContent = jobs.length;
+      document.getElementById("metricPriority").textContent = jobs.filter(j => j.score >= 90 && j.germanLevel !== "red" && j.status !== "Başvurdum").length;
+      document.getElementById("metricEnglish").textContent = jobs.filter(j => j.germanLevel !== "red").length;
+      document.getElementById("metricApplied").textContent = jobs.filter(j => j.status === "Başvurdum").length;
+    }
+
+    function renderPriority() {
+      const list = document.getElementById("priorityList");
+      const priorityJobs = jobs
+        .filter(j => j.score >= 90 && j.germanLevel !== "red" && j.status !== "Başvurdum")
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 3);
+
+      list.innerHTML = priorityJobs.map(job => `
+        <div class="card job-card">
+          <span class="score">${job.score}</span>
+          <h3>${job.company}</h3>
+          <p><strong>${job.title}</strong></p>
+          <p>${job.location}</p>
+          <span class="badge">${job.sector}</span>
+          <span class="badge ${job.germanLevel}">${germanText(job.germanLevel)}</span>
+          <p class="small">${job.notes || ""}</p>
+          <a href="${job.link}" target="_blank">İlanı Aç</a>
+        </div>
+      `).join("");
+
+      if (priorityJobs.length === 0) {
+        list.innerHTML = `<div class="card">Şu anda bu kritere göre acil başvurulacak ilan yok.</div>`;
+      }
+    }
+
+    function getFilteredJobs() {
+      const search = document.getElementById("searchInput").value.toLowerCase();
+      const location = document.getElementById("locationFilter").value;
+      const german = document.getElementById("germanFilter").value;
+      const level = document.getElementById("levelFilter").value;
+      const status = document.getElementById("statusFilter").value;
+      const score = Number(document.getElementById("scoreFilter").value);
+
+      return jobs.filter(job => {
+        const text = `${job.company} ${job.title} ${job.location} ${job.sector}`.toLowerCase();
+        if (search && !text.includes(search)) return false;
+        if (location !== "all" && !job.location.toLowerCase().includes(location)) return false;
+        if (german !== "all" && job.germanLevel !== german) return false;
+        if (level !== "all") {
+          if (level === "director" && !(job.level === "director" || job.level === "vp" || job.level === "head")) return false;
+          if (level !== "director" && job.level !== level) return false;
+        }
+        if (status !== "all" && job.status !== status) return false;
+        if (job.score < score) return false;
+        return true;
+      }).sort((a, b) => b.score - a.score);
+    }
+
+    function render() {
+      const filtered = getFilteredJobs();
+      const table = document.getElementById("jobTable");
+
+      renderMetrics(filtered);
+      renderPriority();
+
+      table.innerHTML = filtered.map(job => {
+        const originalIndex = jobs.findIndex(j => j.id === job.id);
+        return `
+          <tr>
+            <td><span class="score">${job.score}</span></td>
+            <td><strong>${job.company}</strong></td>
+            <td>${job.title}</td>
+            <td>${job.location}</td>
+            <td>${job.sector}</td>
+            <td class="${job.germanLevel}">${job.german || germanText(job.germanLevel)}</td>
+            <td>${job.published}</td>
+            <td>
+              <select class="status-select" onchange="updateStatus(${originalIndex}, this.value)">
+                ${["Başvurmadım", "Başvurulacak", "Başvurdum", "Recruiter'a yazıldı", "Interview", "Offer", "Red"].map(s =>
+                  `<option value="${s}" ${job.status === s ? "selected" : ""}>${s}</option>`
+                ).join("")}
+              </select>
+            </td>
+            <td>
+              <textarea class="notes" onchange="updateNotes(${originalIndex}, this.value)">${job.notes || ""}</textarea>
+            </td>
+            <td><a href="${job.link}" target="_blank">Aç</a></td>
+          </tr>
+        `;
+      }).join("");
+
+      if (filtered.length === 0) {
+        table.innerHTML = `<tr><td colspan="10">Bu filtrelerle ilan bulunamadı.</td></tr>`;
+      }
+    }
+
+    function updateStatus(index, value) {
+      jobs[index].status = value;
+      saveJobs();
+      render();
+    }
+
+    function updateNotes(index, value) {
+      jobs[index].notes = value;
+      saveJobs();
+    }
+
+    function addJob() {
+      const company = document.getElementById("newCompany").value.trim();
+      const title = document.getElementById("newTitle").value.trim();
+
+      if (!company || !title) {
+        alert("Şirket ve pozisyon zorunlu.");
+        return;
+      }
+
+      const germanLevel = document.getElementById("newGermanLevel").value;
+      const newJob = {
+        id: `${company}-${title}-${Date.now()}`.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+        score: Number(document.getElementById("newScore").value) || 70,
+        company,
+        title,
+        location: document.getElementById("newLocation").value.trim() || "Kontrol edilecek",
+        sector: document.getElementById("newSector").value.trim() || "Healthcare",
+        level: inferLevel(title),
+        german: germanText(germanLevel),
+        germanLevel,
+        published: document.getElementById("newPublished").value.trim() || "Kontrol edilecek",
+        status: "Başvurmadım",
+        notes: document.getElementById("newNotes").value.trim(),
+        link: document.getElementById("newLink").value.trim() || "https://www.linkedin.com/jobs/"
+      };
+
+      jobs.push(newJob);
+      saveJobs();
+      clearForm();
+      render();
+    }
+
+    function inferLevel(title) {
+      const t = title.toLowerCase();
+      if (t.includes("vp") || t.includes("vice president")) return "vp";
+      if (t.includes("head")) return "head";
+      if (t.includes("director")) return "director";
+      return "manager";
+    }
+
+    function clearForm() {
+      ["newCompany", "newTitle", "newLocation", "newSector", "newScore", "newPublished", "newLink", "newNotes"].forEach(id => {
+        document.getElementById(id).value = "";
+      });
+      document.getElementById("newGermanLevel").value = "green";
+    }
+
+    function setQuickFilter(type) {
+      if (type === "english") document.getElementById("germanFilter").value = "green";
+      if (type === "berlin") document.getElementById("locationFilter").value = "berlin";
+      if (type === "top") document.getElementById("scoreFilter").value = "90";
+      scrollToJobs();
+      render();
+    }
+
+    function scrollToJobs() {
+      document.getElementById("jobsSection").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function exportData() {
+      const data = JSON.stringify(jobs, null, 2);
+      const blob = new Blob([data], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "sevi-career-os-jobs.json";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    render();
+  </script>
+</body>
+</html>
