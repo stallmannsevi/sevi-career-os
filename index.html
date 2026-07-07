@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sevi Career OS</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; background:#f7f7f7; }
+    h1 { margin-bottom: 5px; }
+    .filters { margin: 20px 0; }
+    button { margin: 4px; padding: 8px 12px; cursor: pointer; }
+    table { width: 100%; border-collapse: collapse; background: white; }
+    th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+    th { background: #222; color: white; }
+    .score { font-weight: bold; }
+    .green { color: green; font-weight: bold; }
+    .yellow { color: #b8860b; font-weight: bold; }
+    .red { color: red; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <h1>Sevi Career OS</h1>
+  <p>Healthcare / MedTech / Pharma Executive Job Tracker</p>
+
+  <div class="filters">
+    <button onclick="filterJobs('all')">Tüm ilanlar</button>
+    <button onclick="filterJobs('berlin')">Berlin</button>
+    <button onclick="filterJobs('english')">Almanca şart değil</button>
+    <button onclick="filterJobs('notApplied')">Başvurmadıklarım</button>
+    <button onclick="filterJobs('top')">90+ Uyum</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Skor</th>
+        <th>Şirket</th>
+        <th>Pozisyon</th>
+        <th>Lokasyon</th>
+        <th>Almanca</th>
+        <th>Yayında</th>
+        <th>Başvurdum mu?</th>
+        <th>İlan</th>
+      </tr>
+    </thead>
+    <tbody id="jobTable"></tbody>
+  </table>
+
+<script>
+const jobs = [
+  {
+    score: 98,
+    company: "Karl Storz",
+    title: "VP Market Management",
+    location: "Tuttlingen / Hybrid",
+    german: "German preferred",
+    germanLevel: "yellow",
+    daysOnline: "Kontrol edilecek",
+    applied: false,
+    link: "https://www.linkedin.com/jobs/"
+  },
+  {
+    score: 96,
+    company: "Axolabs",
+    title: "Senior Director Marketing",
+    location: "Berlin",
+    german: "Likely English-friendly",
+    germanLevel: "green",
+    daysOnline: "Kontrol edilecek",
+    applied: false,
+    link: "https://www.linkedin.com/jobs/"
+  },
+  {
+    score: 94,
+    company: "BD",
+    title: "Sr. Global Marketing Manager",
+    location: "Germany / Remote possible",
+    german: "German not clearly required",
+    germanLevel: "green",
+    daysOnline: "Kontrol edilecek",
+    applied: false,
+    link: "https://www.linkedin.com/jobs/"
+  },
+  {
+    score: 93,
+    company: "Edwards Lifesciences",
+    title: "Director Marketing THV Germany",
+    location: "Germany",
+    german: "Fluent German required",
+    germanLevel: "red",
+    daysOnline: "Kontrol edilecek",
+    applied: false,
+    link: "https://www.linkedin.com/jobs/"
+  },
+  {
+    score: 91,
+    company: "Hologic",
+    title: "Senior Marketing Manager DACH",
+    location: "Germany / DACH",
+    german: "Fluent German required",
+    germanLevel: "red",
+    daysOnline: "Kontrol edilecek",
+    applied: false,
+    link: "https://www.linkedin.com/jobs/"
+  }
+];
+
+function renderJobs(list) {
+  const table = document.getElementById("jobTable");
+  table.innerHTML = "";
+
+  list.forEach((job, index) => {
+    table.innerHTML += `
+      <tr>
+        <td class="score">${job.score}</td>
+        <td>${job.company}</td>
+        <td>${job.title}</td>
+        <td>${job.location}</td>
+        <td class="${job.germanLevel}">${job.german}</td>
+        <td>${job.daysOnline}</td>
+        <td>
+          <input type="checkbox" ${job.applied ? "checked" : ""} onchange="toggleApplied(${index})">
+        </td>
+        <td><a href="${job.link}" target="_blank">LinkedIn'de Aç</a></td>
+      </tr>
+    `;
+  });
+}
+
+function toggleApplied(index) {
+  jobs[index].applied = !jobs[index].applied;
+  localStorage.setItem("seviJobs", JSON.stringify(jobs));
+}
+
+function filterJobs(type) {
+  let filtered = jobs;
+
+  if (type === "berlin") {
+    filtered = jobs.filter(j => j.location.toLowerCase().includes("berlin"));
+  }
+
+  if (type === "english") {
+    filtered = jobs.filter(j => j.germanLevel !== "red");
+  }
+
+  if (type === "notApplied") {
+    filtered = jobs.filter(j => !j.applied);
+  }
+
+  if (type === "top") {
+    filtered = jobs.filter(j => j.score >= 90);
+  }
+
+  renderJobs(filtered);
+}
+
+const saved = localStorage.getItem("seviJobs");
+if (saved) {
+  const savedJobs = JSON.parse(saved);
+  savedJobs.forEach((job, i) => {
+    if (jobs[i]) jobs[i].applied = job.applied;
+  });
+}
+
+renderJobs(jobs);
+</script>
+
+</body>
+</html>
